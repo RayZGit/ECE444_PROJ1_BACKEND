@@ -1,5 +1,5 @@
 from flask import Flask,jsonify,abort,render_template,url_for
-import requests, json
+import json
 import http.client
 
 app = Flask(__name__)
