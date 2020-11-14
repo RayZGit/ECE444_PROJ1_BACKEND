@@ -1,11 +1,66 @@
 from flask import Flask,jsonify,abort,render_template,url_for
 import json
 import http.client
+import sys
+
 
 app = Flask(__name__)
 
+def set_default(obj):
+    if isinstance(obj, set):
+        return list(obj)
+    raise TypeError
+
 class mealDB:
     conn = http.client.HTTPSConnection("www.themealdb.com")
+
+
+def data_transformation(data_dict):
+    ingredients = []
+    #print(data_dict['idMeal'])
+    for i in range(20):
+        if(not data_dict['strMeasure'+str(i+1)] or data_dict['strMeasure'+str(i+1)] is None):
+            break
+        mq = data_dict['strMeasure'+str(i+1)].split()
+        while(len(mq)<2):
+            mq.append('N/A')
+        ingredients.append({
+        "id":str(i),
+        "item": data_dict['strIngredient'+str(i+1)],
+        "measurement":mq[1] ,
+        "quantity":mq[0],
+        "gotten":False,
+        "price":0
+        }) 
+            
+        
+
+    frontData={
+        "instructions":data_dict['strInstructions'],
+        "servings":"2",
+        "recipeId": data_dict['idMeal'],
+        "cookTime": "10",
+        "userId": "eu-west-1:1234abcd",
+        "video": data_dict['idMeal'],
+        "attachment": data_dict['strMealThumb'],
+        "createdAt": data_dict['strYoutube'],
+        "ingredients":ingredients,
+        "tag":{data_dict['strCategory'],data_dict['strArea']},
+        "title":data_dict['strMeal']
+    }
+    return frontData
+
+
+def process_data(data):
+    #print(data.read().decode("utf-8"))
+    y = json.loads(data.read().decode("utf-8"))
+    print(type(y['meals'][0]))
+    res = list()
+    for x in y['meals']:
+        res.append(data_transformation(x))
+    return res
+
+
 
 @app.errorhandler(404)
 def page_not_found(e):
@@ -31,9 +86,11 @@ def requestFirst(fst):
 def requestMeal(recipe):
         mealDB.conn.request("GET", "/api/json/v1/1/search.php?s="+recipe)
         res = mealDB.conn.getresponse()
-        #return res.read()
         #print(res.read().decode("utf-8"))
-        return res.read().decode("utf-8")
+        res_list = process_data(res)
+        res_json = json.dumps(res_list,default=set_default) 
+        print(type(res_list[0]))
+        return res_json
         #render_template('index.html', title="page", jsonfile=json.dumps(res.read().decode("utf-8")))
 
 @app.route('/recipe/<string:id>', methods=['GET'])
