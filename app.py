@@ -36,7 +36,7 @@ def data_transformation(data_dict):
         
 
     frontData={
-        "instructions":data_dict['strInstructions'],
+        "instructions":[data_dict['strInstructions']],
         "servings":"2",
         "recipeId": data_dict['idMeal'],
         "cookTime": "10",
