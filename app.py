@@ -2,9 +2,11 @@ from flask import Flask,jsonify,abort,render_template,url_for
 import json
 import http.client
 import sys
+from flask_cors import CORS
 
 
 app = Flask(__name__)
+cors = CORS(app)
 
 def set_default(obj):
     if isinstance(obj, set):
