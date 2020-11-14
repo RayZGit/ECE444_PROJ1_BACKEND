@@ -41,9 +41,9 @@ def data_transformation(data_dict):
         "recipeId": data_dict['idMeal'],
         "cookTime": "10",
         "userId": "eu-west-1:1234abcd",
-        "video": data_dict['idMeal'],
+        "video": data_dict['strYoutube'], 
         "attachment": data_dict['strMealThumb'],
-        "createdAt": data_dict['strYoutube'],
+        "createdAt": data_dict['dateModified'],
         "ingredients":ingredients,
         "tag":{data_dict['strCategory'],data_dict['strArea']},
         "title":data_dict['strMeal']
