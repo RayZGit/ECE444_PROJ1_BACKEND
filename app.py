@@ -101,8 +101,10 @@ def requestSpecific(id):
         res = mealDB.conn.getresponse()
         #return res.read()
         #print(res.read().decode("utf-8"))
-        return res.read().decode("utf-8")
-        #return render_template('index.html', title="page", jsonfile=json.dumps(res.read().decode("utf-8")))
+        res_list = process_data(res)
+        res_json = json.dumps(res_list,default=set_default) 
+        print(type(res_list[0]))
+        return res_json
 
 @app.route('/random/', methods=['GET'])
 def random():
@@ -110,7 +112,10 @@ def random():
         res = mealDB.conn.getresponse()
         #return res.read()
         #print(res.read().decode("utf-8"))
-        return res.read().decode("utf-8")
+        res_list = process_data(res)
+        res_json = json.dumps(res_list,default=set_default) 
+        print(type(res_list[0]))
+        return res_json
 
 @app.route('/search_main/<string:main>', methods=['GET'])
 def requestMain(main):
