@@ -73,7 +73,7 @@ def signup():
         var = request.json
         user = var['username']
         password = var['password']
-        if fire().signup(user, password):
+        if fire().signUp(user, password):
             return "Success"
 
     return 'Failed'
@@ -86,7 +86,7 @@ def signin():
         var = request.json
         user = var['username']
         password = var['password']
-        if fire().signin(user, password):
+        if fire().signIn(user, password):
             return "Success"
     return 'Failed'
 
