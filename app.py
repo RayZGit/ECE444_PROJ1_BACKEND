@@ -74,7 +74,7 @@ def signup():
         user = var['username']
         password = var['password']
         if fire().signUp(user, password):
-            return "Success"
+            return jsonify(var)
 
     return 'Failed'
 
@@ -87,7 +87,7 @@ def signin():
         user = var['username']
         password = var['password']
         if fire().signIn(user, password):
-            return "Success"
+            return jsonify(var)
     return 'Failed'
 
 
