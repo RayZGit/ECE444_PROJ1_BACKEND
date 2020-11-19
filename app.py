@@ -70,10 +70,9 @@ def process_data(data):
 def signup():
     var = request.json
     print(var)
-    print(request.args.get('username'))
-    print(request.args.get('data'))
-    print(request.args.getlist('password'))
-    print(request.args.getlist('data'))
+    print(type (var))
+    print(var['username'])
+    
     if request.method == 'POST':
         user = request.data['username']
         password = request.data['password']
@@ -91,11 +90,9 @@ def signin():
 
     var = request.json
     print(var)
+    print(type (var))
+    print(var['username'])
 
-    print(request.args.get('username'))
-    print(request.args.get('data'))
-    print(request.args.getlist('password'))
-    print(request.args.getlist('data'))
     if request.method == 'POST':
         user = request.form['username']
         password = request.form['password']
