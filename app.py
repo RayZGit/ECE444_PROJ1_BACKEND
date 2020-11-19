@@ -71,7 +71,7 @@ def signup():
     
     if request.method == 'POST':
         var = request.json
-        user = var['username']
+        user = var['email']
         password = var['password']
         if fire().signUp(user, password):
             return jsonify(var)
@@ -84,7 +84,7 @@ def signin():
 
     if request.method == 'POST':
         var = request.json
-        user = var['username']
+        user = var['email']
         password = var['password']
         if fire().signIn(user, password):
             return jsonify(var)
