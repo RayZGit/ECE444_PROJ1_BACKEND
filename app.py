@@ -70,8 +70,7 @@ def process_data(data):
 def signup():
     print(request.method)
     print(request)
-    print(request.data['username'])
-    print(request.form['data']['password'])
+    print(request.args)
     if request.method == 'POST':
         user = request.data['username']
         password = request.data['password']
@@ -86,6 +85,7 @@ def signin():
     # print(request)
     # print(request.form['username'])
     # print(request.form['password'])
+    print(request.args)
 
     if request.method == 'POST':
         user = request.form['username']
