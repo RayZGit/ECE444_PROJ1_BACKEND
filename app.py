@@ -78,6 +78,11 @@ def signup():
 
 @app.route('/user/signin', methods=['GET','POST'])
 def signin():
+    print(request.method)
+    print(request)
+    print(request.form['username'])
+    print(request.form['password'])
+
     if request.method == 'POST':
         user = request.form['username']
         password = request.form['password']
