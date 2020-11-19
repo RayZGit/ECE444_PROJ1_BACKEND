@@ -68,9 +68,13 @@ def process_data(data):
 
 @app.route('/user/signup', methods=['GET','POST'])
 def signup():
+    print(request.method)
+    print(request)
+    print(request.data['username'])
+    print(request.form['data']['password'])
     if request.method == 'POST':
-        user = request.form['username']
-        password = request.form['password']
+        user = request.data['username'])
+        password = request.data['password']
         if fire().signup(user, password):
             return "Success"
 
@@ -78,10 +82,10 @@ def signup():
 
 @app.route('/user/signin', methods=['GET','POST'])
 def signin():
-    print(request.method)
-    print(request)
-    print(request.form['username'])
-    print(request.form['password'])
+    # print(request.method)
+    # print(request)
+    # print(request.form['username'])
+    # print(request.form['password'])
 
     if request.method == 'POST':
         user = request.form['username']
