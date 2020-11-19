@@ -3,7 +3,8 @@ import json
 import http.client
 import sys
 from flask_cors import CORS
-
+from user.models import User
+from firbase.fire import fire
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -12,6 +13,8 @@ def set_default(obj):
     if isinstance(obj, set):
         return list(obj)
     raise TypeError
+
+
 
 class mealDB:
     conn = http.client.HTTPSConnection("www.themealdb.com")
@@ -62,6 +65,24 @@ def process_data(data):
         res.append(data_transformation(x))
     return res
 
+@app.route('/user/signup', methods=['GET','POST'])
+def signup():
+    if request.method == 'POST':
+        user = request.form['username']
+        password = request.form['password']
+        if fire().signup(user, password):
+            return "Success"
+
+    return 'Failed'
+
+@app.route('/user/signin', methods=['GET','POST'])
+def signin():
+    if request.method == 'POST':
+        user = request.form['username']
+        password = request.form['password']
+        if fire().signin(user, password):
+            return "Success"
+    return 'Failed'
 
 
 @app.errorhandler(404)
