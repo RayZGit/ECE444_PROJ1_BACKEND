@@ -68,6 +68,8 @@ def process_data(data):
 
 @app.route('/user/signup', methods=['GET','POST'])
 def signup():
+    var = request.json
+    print(var)
     print(request.args.get('username'))
     print(request.args.get('data'))
     print(request.args.getlist('password'))
@@ -86,6 +88,9 @@ def signin():
     # print(request)
     # print(request.form['username'])
     # print(request.form['password'])
+
+    var = request.json
+    print(var)
 
     print(request.args.get('username'))
     print(request.args.get('data'))
