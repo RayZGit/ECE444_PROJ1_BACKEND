@@ -73,7 +73,7 @@ def signup():
     print(request.data['username'])
     print(request.form['data']['password'])
     if request.method == 'POST':
-        user = request.data['username'])
+        user = request.data['username']
         password = request.data['password']
         if fire().signup(user, password):
             return "Success"
