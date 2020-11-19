@@ -1,4 +1,4 @@
 Flask==1.1.2
 gunicorn==20.0.4
 flask-cors==3.0.9
-pyrebase==2.11.1
+pyrebase==3.0.27
