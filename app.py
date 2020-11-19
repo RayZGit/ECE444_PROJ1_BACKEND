@@ -84,7 +84,7 @@ def signin():
 
     if request.method == 'POST':
         var = request.json
-        user = var['email']
+        user = var['username']
         password = var['password']
         if fire().signIn(user, password):
             return jsonify(var)
